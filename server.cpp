@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/26 14:45:30 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/26 14:53:37 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int ac, char **av)
   // ** CREATE SOCKET**/
   server_fd = socket(AF_INET, SOCK_STREAM, 0);
   if (server_fd == 0)
-    {
+  {
         std::cerr << "socket failed" << std::endl;
         exit(EXIT_FAILURE);
   }
@@ -37,7 +37,9 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
   }
   // wait for an incoming connection
-  if (listen(server_fd, SOMAXCONN){
-          
-    }
+  if (listen(server_fd, SOMAXCONN) // SOMAXCONN is the maximum number of pending connections that can be queued up before connections are refused. 
+  {
+        std::cerr << "Listening failed" << std::endl;
+        exit(EXIT_FAILURE); 
+  }
 }
