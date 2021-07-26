@@ -6,12 +6,11 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:25 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/25 20:26:17 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/26 15:37:09 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.hpp"
 
-int main(int ac, char **av) {
-  
-}
+int main(int ac, char **av) {}
+

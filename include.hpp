@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:20:02 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/25 20:48:31 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/26 17:10:23 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ struct in_addr {
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
+#include <arpa/inet.h>     //it have all data sockaddr ....
+#include <netdb.h> // definitions for network database operations
 #include <sys/socket.h> // have data of socket ... lenght 32bits
-#include <netinet/in.h>  //it have all data sockaddr ....
+#include <sys/types.h>    
 #define PORT 8080
 
 
