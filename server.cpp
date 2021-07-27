@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 16:12:56 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 16:57:11 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int main(int ac, char **av)
         if (valrecv < 0) {
         std::cerr << ("ERROR reading from socket") << std::endl;
         } else {
-                      send(new_socket,"1,2,3",strlen("1,2,3"),0);
-          }
+                      send(new_socket,"hello from server",strlen("hello from server"),0);
+
+                      }
       }
-     std::cout << " bye bye" << buffer << std::endl;
+  std::cerr << "hello from server";
      close(new_socket);
      close(server_fd);
 
