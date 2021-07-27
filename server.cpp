@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 16:57:11 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 18:04:04 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main(int ac, char **av)
   struct sockaddr_in add;
   struct sockaddr_in client;
   socklen_t size_client = sizeof(client); // socklen_t size of adress
-  char buffer[1024] = {0};
 
   // ** CREATE SOCKET**/
   server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -53,32 +52,25 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
       }
       // The accept system call grabs the first connection request
+
+      // since we have a valid socket , we gonna print some information
+      // send and receive msg , now we use rcv and  a buffer size
+     //read from new_socket
+      while (1) {
+        std::cout << "\t\t\t Waiting for new connection\n";
       if ((new_socket = accept(server_fd, (struct sockaddr *)&client,
                                &size_client)) < 0)
       {
         std::cerr << "acceptance failed" << std::endl;
         exit(EXIT_FAILURE);
       }
-
-      else {
-        std::cout << "Server Connected from " <<  inet_ntoa(client.sin_addr) << " port  "  <<  ntohs(client.sin_port) << std::endl;
+      std::cout << "Server Connected from " <<  inet_ntoa(client.sin_addr) << " port  "  <<  ntohs(client.sin_port) << std::endl;
+      char buffer[1024] = {0};
+      valrecv = recv(new_socket, buffer, 1024, 0);
+      std::cout << buffer << std::endl;
+      write(new_socket , "\thello from server", strlen("\thello from server"));
+      std::cout << "------------------------------------------------------" << std::endl;
+      close(new_socket);
       }
-
-      // since we have a valid socket , we gonna print some information
-      // send and receive msg , now we use rcv and  a buffer size
-     //read from new_socket
-      while (valrecv == recv(new_socket, buffer, 1024, 0)) {
-        if (valrecv < 0) {
-        std::cerr << ("ERROR reading from socket") << std::endl;
-        } else {
-                      send(new_socket,"hello from server",strlen("hello from server"),0);
-
-                      }
-      }
-  std::cerr << "hello from server";
-     close(new_socket);
-     close(server_fd);
-
     return 0;
-      
 }

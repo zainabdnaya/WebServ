@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:25 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 16:56:23 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 18:04:24 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(int ac, char **av) {
     }
     
   int server_fd; // socket descriptor, an integer!
-  int new_socket; // conection establish btw client & server
   int valread; // communication part
   struct sockaddr_in add;
   char buffer[1024] = {0};
@@ -45,11 +44,8 @@ int main(int ac, char **av) {
         exit(EXIT_FAILURE);
   }
   
-  send(server_fd, "hello from client", strlen("hello from client"), 0);
-  std::cerr << "hello from client";
-  valread = recv(new_socket, buffer, 1024, 0);
-  std::cerr << buffer << std::endl;
-       close(server_fd);
-
+  send(server_fd, "\thello from client", strlen("\thello from client"), 0);
+  valread = recv(server_fd, buffer, 1024, 0);
+  std::cout << buffer << std::endl;
   return 0;
 }
