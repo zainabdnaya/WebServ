@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:25 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 18:04:24 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 18:45:17 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(int ac, char **av) {
         exit(EXIT_FAILURE);
   }
   
-  send(server_fd, "\thello from client", strlen("\thello from client"), 0);
+  send(server_fd, "\t hello from client", strlen("\thello from client"), 0);
   valread = recv(server_fd, buffer, 1024, 0);
   std::cout << buffer << std::endl;
   return 0;
