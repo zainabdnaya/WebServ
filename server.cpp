@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 13:21:47 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 16:12:56 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 int main(int ac, char **av)
 {
+  if (ac != 2) {
+    exit(1);
+  }
   int server_fd; // socket descriptor, an integer!
   int new_socket; // conection establish btw client & server
-  int valread; // communication part
+  int valrecv; // communication part
   struct sockaddr_in add;
   struct sockaddr_in client;
   socklen_t size_client = sizeof(client); // socklen_t size of adress
   char buffer[1024] = {0};
-
 
   // ** CREATE SOCKET**/
   server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -32,7 +34,7 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
   }
   // bind an IP add and a port to a  socket
-  add.sin_port = htons(PORT);
+  add.sin_port = htons(std::stoi(av[1]));
   add.sin_family = AF_INET;
   add.sin_addr.s_addr = INADDR_ANY;
 
@@ -64,14 +66,15 @@ int main(int ac, char **av)
 
       // since we have a valid socket , we gonna print some information
       // send and receive msg , now we use rcv and  a buffer size
-      // const void *msg = "hello from server\n";
-      // send(new_socket, msg, 20, 0);
-      // comunication part
-      valread = read(new_socket, buffer, 500);
-      if (valread < 0) {
+     //read from new_socket
+      while (valrecv == recv(new_socket, buffer, 1024, 0)) {
+        if (valrecv < 0) {
         std::cerr << ("ERROR reading from socket") << std::endl;
+        } else {
+                      send(new_socket,"1,2,3",strlen("1,2,3"),0);
+          }
       }
-     std::cout << "Here is the message: " << buffer << std::endl;
+     std::cout << " bye bye" << buffer << std::endl;
      close(new_socket);
      close(server_fd);
 

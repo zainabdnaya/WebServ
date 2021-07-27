@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:20:02 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 11:54:13 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 16:09:57 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include <sys/socket.h> // have data of socket ... lenght 32bits
 #include <sys/types.h>
 #include <unistd.h>
-#define PORT 8080
 
 
 /*
