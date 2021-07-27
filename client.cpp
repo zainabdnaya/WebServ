@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:25 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 13:17:43 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 13:20:37 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int main(int ac, char **av)
   struct sockaddr_in client;
   socklen_t size_client = sizeof(client); // socklen_t size of adress
   char buffer[1024] = {0};
-    return 0;
-      
+
+  return 0;    
 }

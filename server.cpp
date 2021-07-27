@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 11:53:15 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/27 13:21:47 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int main(int ac, char **av)
         exit(EXIT_FAILURE);
   }
   // wait for an incoming connection
-  if (listen(server_fd, SOMAXCONN)) // SOMAXCONN is the maximum number of pending
-                                   // connections that can be queued up before
-                                   // connections are refused.
+  if (listen(server_fd, SOMAXCONN)) // SOMAXCONN is the maximum number of pending connections that can be queued up before connections are refused.
       {
         std::cerr << "Listening failed" << std::endl;
         exit(EXIT_FAILURE);
@@ -65,11 +63,10 @@ int main(int ac, char **av)
       }
 
       // since we have a valid socket , we gonna print some information
-
       // send and receive msg , now we use rcv and  a buffer size
       // const void *msg = "hello from server\n";
       // send(new_socket, msg, 20, 0);
-    // comunication part
+      // comunication part
       valread = read(new_socket, buffer, 500);
       if (valread < 0) {
         std::cerr << ("ERROR reading from socket") << std::endl;
