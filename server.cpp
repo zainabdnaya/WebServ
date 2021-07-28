@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/28 17:16:47 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/28 17:29:18 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(int ac, char **av)
       // printf("===>%s\n", buffer);
       write(new_socket, buffer, 30000);
       // write(new_socket , "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!", strlen("HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"));
-      std::cout << "------------------------------------------------------" << std::endl;
+      std::cout << "------------------------------------------------------" <<  std::endl;
       }
     return 0;
 }
