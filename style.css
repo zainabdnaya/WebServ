@@ -1,0 +1,145 @@
+.nav a {
+    float: right;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 16px;
+    text-decoration: none;
+    display: flexbox;
+}
+
+.nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+.sign_button {
+    background-color: #2063d6;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
+    font-weight: lighter;
+    bottom: 7px;
+    font-size: 15px;
+    height: 36px;
+    display: flexbox;
+}
+
+.grid {
+    height: 25px;
+    position: relative;
+    bottom: 4px;
+    display: flexbox;
+}
+
+.logo {
+    text-align: center;
+    margin: 0 auto;
+    clear: both;
+    padding-top: 200px;
+    padding-bottom: 100px;
+    position: center;
+    margin: 10em 32.5em;
+    display: flexbox;
+}
+
+.bar {
+    margin: 0 auto;
+    width: 600px;
+    border-radius: 25px;
+    border: 1px solid #dcdcdc;
+    margin-top: 40px;
+    display: flexbox;
+}
+
+.bar:hover {
+    box-shadow: 1px 1px 8px 1px #dcdcdc;
+}
+
+.searchbar {
+    height: 45px;
+    border: none;
+    width: 500px;
+    font-size: 15px;
+    outline: none;
+    border-radius: 5px;
+    display: flexbox;
+}
+
+.voice {
+    height: 20px;
+    position: relative;
+    top: 5px;
+    left: -3px;
+}
+
+.search {
+    height: 17px;
+    position: relative;
+    top: 5px;
+    left: -520px;
+}
+
+.bot {
+    margin-top: 30px;
+    font-weight: lighter;
+    display: flexbox;
+}
+
+.button {
+    background-color: #e6e6e6e5;
+    border: none;
+    color: #5f5c5c;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    outline: none;
+    display: flexbox;
+}
+
+.button:hover {
+    border: 1px solid #c8c8c8;
+    padding: 9px 19px;
+    color: #808080;
+}
+
+.button:focus {
+    border: 1px solid #212224;
+    padding: 9px 19px;
+}
+
+.footer {
+    color: #808080;
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    caret-color: #e9dfdf;
+    height: 30px;
+    padding: 5px;
+    display: block;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 0.5px;
+}
+
+.footer-link {
+    color: #808080;
+    text-decoration: none;
+}
+
+.left {
+    float: left;
+}
+
+.footer .right {
+    float: right;
+    /* margin: auto; */
+    /* padding-bottom: 10px; */
+}

@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:16:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/07/27 18:45:22 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/07/28 11:52:02 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int main(int ac, char **av)
         std::cerr << "acceptance failed" << std::endl;
         exit(EXIT_FAILURE);
       }
-        std::cout << "Server Connected from " <<  inet_ntoa(client.sin_addr) << " port  "  <<  ntohs(client.sin_port) << std::endl;
+        // std::cout << "Server Connected from " <<  inet_ntoa(client.sin_addr) << " port  "  <<  ntohs(client.sin_port) << std::endl;
       char buffer[1024] = {0};
       valrecv = recv(new_socket, buffer, 1024, 0);
       std::cout << buffer << std::endl;
-      write(new_socket , "\thello from server", strlen("\thello from server"));
+      write(new_socket , "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!", strlen("HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"));
       std::cout << "------------------------------------------------------" << std::endl;
       close(new_socket);
       }
