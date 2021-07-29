@@ -1,32 +1,59 @@
-<!DOCTYPE html">
-<html lang="fr">
+<!DOCTYPE html>
+<title>Google Homepage</title>
 
 <head>
-    <meta charset="utf-8" />
-    <title>Création d&#39;un design étape par étape - Etape n°1 : Le code xhtml</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Shippori Mincho B1' rel='stylesheet'>
 </head>
 
+<header>
+    <nav class="nav">
+        <a class="links" href="#user"><button class="sign_button" type="button">Sign in</button></a>
+        <a href="#grid"><img class="grid"
+                src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-11-512.png"
+                title="Google apps"></a>
+        <a class="nav-link" href="#images">Images</a>
+        <a class="nav-link" href="#gmail">Gmail</a>
+    </nav>
+</header>
+
 <body>
-    <div id="conteneur">
-        <h1 id="header"><a href="#" title="Colored Design - Accueil"><span>Colored Design</span></a></h1>
-
-        <nav>
-            <ul id="menu">
-                <li><a href="#">Etape n°1</a></li>
-                <li><a href="#">Etape n°2</a></li>
-                <li><a href="#">Etape n°3</a></li>
-                <li><a href="#">Etape n°4</a></li>
-                <li><a href="#">Etape n°5</a></li>
-            </ul>
-        </nav>
-
-        <div id="contenu">
-            <h2>Un titre</h2>
-            <p>Un paragraphe</p>
+    <center>
+        <div class="logo">
+            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></a>
+            <!-- Search Bar -->
+            <div class="bar">
+                <input class="searchbar" type="text" title="Search">
+                <a href="#">
+                    <img class="voice"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png"
+                        title="Search by Voice"></a>
+                <img class="search" src="https://image.flaticon.com/icons/png/512/107/107122.png"></a>
+            </div>
+            <div class="bot">
+                <button class="button" type="button">Google Search</button>
+                <button class="button" type="button">I'm Feeling Lucky</button>
+            </div>
         </div>
+    </center>
 
-        <p id="footer">Réalisation des codes HTML/CSS, du tutoriel et du design par ElMoustiko</p>
-    </div>
+
+    <footer>
+        <footer class="footer">
+            <div class="left">
+                <a class="footer-link" href="#">Advertising</a>
+                <a class="footer-link" href="#">Business</a>
+                <a class="footer-link" href="#">About</a>
+                <a class="footer-link" href="#">How Search works</a>
+            </div>
+            <div class="right">
+                <a class="footer-link" href="#">Privacy</a>
+                <a class="footer-link" href="#">Terms</a>
+                <a class="footer-link" href="#">Settings</a>
+            </div>
+        </footer>
+    </footer>
+
 </body>
 
 </html>
