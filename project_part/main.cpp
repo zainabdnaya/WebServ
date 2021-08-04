@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/02 18:22:31 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/04 12:32:28 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int main(int ac,char **av)
             check_error(av[1]);
     }
     else
-        std::cerr << "wronf file \n"
+        std::cerr << "wrong file \n";
     return (0);
 }

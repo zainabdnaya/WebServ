@@ -6,11 +6,23 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 17:24:36 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/02 17:35:46 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/04 00:19:50 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.hpp"
+
+bool	line_equal(std::string const &line, std::string const &str)
+{
+	unsigned int	start ;
+	unsigned int	end ;
+    
+    end = str.size();
+    start = 0;
+	if (line.size() >= start && line.substr(start, end) == str)
+		return true;
+	return false;
+}
 
 bool compare_end(std::string const &s1, std::string const &s2)
 {

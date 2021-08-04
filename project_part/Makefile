@@ -2,7 +2,7 @@ NAME = webserv
 
 FLAGS = -Wall -Wextra -Werror 
 
-target = *.cpp\
+target = $(wildcard *.cpp)
 			
 headers = include.hpp\
 
