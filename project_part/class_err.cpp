@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 00:33:17 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/04 10:49:49 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/04 16:15:49 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ Error::Error()
 {
     nbr_server = 0;
     nbr_location = 0;
+    nbr_brakets = 0;
 }
 
 unsigned int Error::get_server()

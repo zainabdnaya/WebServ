@@ -1,6 +1,6 @@
 NAME = webserv
 
-FLAGS = -Wall -Wextra -Werror 
+# FLAGS = -Wall -Wextra -Werror 
 
 target = $(wildcard *.cpp)
 			

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/04 12:32:28 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/04 17:19:41 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ int main(int ac,char **av)
     }
     else
         std::cerr << "wrong file \n";
+    // std::string line = "    dkdkdlkdk";
+    // if(line.find("}") != std::string::npos)
+    //     std::cout << "true" << std::endl;
+    // else
+    //     std::cout << "false" << std::endl;
     return (0);
 }
