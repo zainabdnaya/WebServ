@@ -35,6 +35,5 @@ bool    compare_end(std::string const &s1, std::string const &s2);
 void    check_error(char    *file);
 void    error_msg(std::string const msg);
 bool    line_equal(std::string const &line, std::string const &str);
-void    check_details(Error check,std::string   line);
-
+int	check_details(std::string line, Error check);
 #endif
