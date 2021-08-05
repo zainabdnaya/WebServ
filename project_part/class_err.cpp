@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 00:33:17 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/04 16:15:49 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/05 15:12:40 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ Error::Error()
 {
     nbr_server = 0;
     nbr_location = 0;
-    nbr_brakets = 0;
+    server = 0;
+    location = 0;
 }
 
 unsigned int Error::get_server()
@@ -29,9 +30,15 @@ unsigned int Error::get_location()
     return (this->nbr_location);
 }
 
-unsigned int Error::get_brakets()
+unsigned int Error::get_one()
 {
-    return (this->nbr_brakets);
+    return (this->server);
+}
+
+
+unsigned int Error::get_two()
+{
+    return (this->location);
 }
 
 
@@ -45,11 +52,15 @@ void Error::set_location(unsigned int nbr_loc)
     this->nbr_location = nbr_loc;
 }
 
-void Error::set_brakets(unsigned int nbr_brak)
+void Error::set_one(unsigned int ser)
 {
-    this->nbr_brakets = nbr_brak;
+    this->server=  ser;
 }
 
+void Error::set_two(unsigned int loc)
+{
+    this->location =  loc;
+}
 Error::~Error()
 {
 }

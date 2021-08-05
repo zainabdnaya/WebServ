@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 17:29:18 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/05 12:15:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/05 15:20:55 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void check_error(char *file)
     Error check;
     std::string line = "";
     std::ifstream my_file;
-
+    unsigned int w = 0;
+    unsigned int h = 0;
     unsigned int k = 0;
     int nb_line = 0;
     my_file.open(file);
@@ -40,6 +41,14 @@ void check_error(char *file)
         if(line.find("}") != std::string::npos)
         {
             k--;
+        }
+        if(line.find("server") != std::string::npos)
+        {
+            check.set_one(w++);   
+        }
+        if(line.find("location") != std::string::npos)
+        {
+            check.set_two(h++);   
         }
     }
     if (k!= 0)
