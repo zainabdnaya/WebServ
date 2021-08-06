@@ -1,29 +1,42 @@
-NAME = webserv
+NAME= Webserv
+COMP= clang++
+# FLAGS= -Wall -Wextra -Werror
 
-# FLAGS = -Wall -Wextra -Werror 
+SRC_PATH= ./src
+HDR_PATH= ./includes
+OBJ_PATH= obj
 
-target = $(wildcard *.cpp)
-			
-headers = include.hpp\
+SRC_NAME= main.cpp\
+		  ParsConfig.cpp\
 
-OBJS = $(target:.cpp=.o)
+OBJ_NAME= $(SRC_NAME:.cpp=.o)
 
-all: $(NAME)
+OBJ= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+SRC= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+HDR= $(addprefix $(HDR_PATH)/,$(HDR_NAME))
 
-%.o: %.cpp $(headers)
-	@clang++ $(FLAGS) -c $< -o $@
+H_FLAG= -I $(HDR_PATH)
 
- 
-$(NAME): $(OBJS)
-	@clang++ $(FLAGS) $(OBJS) -o $(NAME)
-	@echo "\n \x1b[31m Make works Succesfully!\n\x1b[0m"
 
+all: $(NAME) 
+
+$(NAME) : $(OBJ)
+	@rm -rf $(NAME)
+	@$(COMP) -g $(H_FLAG) $(OBJ) -o $@
+	@echo "\033[91m \t this project Made by: Helkhatri && Zdnaya \n\033[0m"                                          
+	@echo "\033[91m \t Webserve has been created successfully  \n\033[0m"
+
+
+$(OBJ_PATH)/%.o:  $(SRC_PATH)/%.cpp $(HDR)
+	@mkdir -p $(OBJ_PATH) 
+	@$(COMP) -g $(FLAGS) $(H_FLAG) -g -o $@ -c $<
 
 clean:
-	@rm -rf $(OBJS)
-	@echo "\n \x1b[31m All The objects has been deleted!\n \x1b[0m"
+	@rm -rf $(OBJ_PATH)
+	@echo "\033[10m  all objects files are deleted.\n\033[0m" 
 
 fclean: clean
 	@rm -rf $(NAME)
+	@echo "\033[10m  $(NAME) && all obbjects are deleted.\n\033[0m" 
 
-re: fclean all
+re : fclean all

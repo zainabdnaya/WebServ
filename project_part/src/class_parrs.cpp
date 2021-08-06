@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:44:15 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/06 15:12:05 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/06 17:01:27 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,26 @@
 
 Parsing::Parsing()
 {
-    this->map_s[""] = "";//<std::string,str::string>;
+    this->map_s[""] = ""; //<std::string,str::string>;
 }
 
-std::map<std::string, std::string> Parsing::map_simpl(std::ifstream my_file)
+// Parsing::Parsing(std::ifstream my_file)
+// {
+//     this->my_file = my_file;
+// }
+
+// Parsing &Parsing::operator=(Parsing const &equal)
+// {
+//     if (this != &equal)
+//         my_file = equal.my_file;
+//     return (*this);
+// }
+
+// Parsing::Parsing(Parsing const &cpy)
+// {
+// }
+
+std::map<std::string, std::string> Parsing::map_simpl(std::ifstream &my_file)
 {
     std::string key;
     std::string str1;
@@ -71,12 +87,12 @@ std::map<std::string, std::string> Parsing::map_simpl(std::ifstream my_file)
             map_s[key] = str;
         }
     }
-    return(map_s);
+    return (map_s);
 }
 
 std::map<std::string, std::string> Parsing::get_map()
 {
-    return(std::map<std::string, std::string>(this->map_s));
+    return (std::map<std::string, std::string>(this->map_s));
 }
 
 Parsing::~Parsing()
