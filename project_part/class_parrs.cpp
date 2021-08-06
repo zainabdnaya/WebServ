@@ -6,49 +6,79 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:44:15 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/05 17:33:54 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/06 15:12:05 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.hpp"
 
-Parse_server::Parse_server()
+Parsing::Parsing()
 {
-    listen = 80;
-    host = "";
-    server_name = "";
-    clinet_max_bosy_size = "";
-    error_pages = NULL;
-    root = "";
+    this->map_s[""] = "";//<std::string,str::string>;
 }
 
-Parse_location::Parse_location()
+std::map<std::string, std::string> Parsing::map_simpl(std::ifstream my_file)
 {
-    root = "";
-    index = "";
-    allow_methods = "";
-    redirection = ""; 
-    CGI = "";
-    upload_store_directory = "";
+    std::string key;
+    std::string str1;
+    std::string str;
+    while (my_file >> str)
+    {
+        while ((str == "{" || str == "server"))
+            my_file >> str;
+        if (str == "}" && my_file.eof())
+            my_file >> str;
+        else if (str == "}" && !my_file.eof())
+            break;
+        else if (str == "http_methods")
+        {
+            key = str;
+            my_file >> str;
+            str1 = "";
+            while (str == "GET" || str == "HEAD" || str == "POST" || str == "PUT" || str == "OPTIONS" || str == "DELETE")
+            {
+                str1 += str + " ";
+                my_file >> str;
+            }
+            map_s[key] = str1;
+            if (str == "error_page")
+            {
+                key = str;
+                my_file >> str;
+                str1 = str;
+                my_file >> str;
+                map_s[key] = str1 + " " + str;
+            }
+            else
+            {
+                key = str;
+                my_file >> str;
+                map_s[key] = str;
+            }
+        }
+        else if (str == "error_page")
+        {
+            key = str;
+            my_file >> str;
+            str1 = str;
+            my_file >> str;
+            map_s[key] = str1 + " " + str;
+        }
+        else
+        {
+            key = str;
+            my_file >> str;
+            map_s[key] = str;
+        }
+    }
+    return(map_s);
 }
 
-std::map<std::string, std::string>  Parse_server::map_element(std::ifstream my_file, unsigned int nbr_serv)
+std::map<std::string, std::string> Parsing::get_map()
 {
-    // while(std)
+    return(std::map<std::string, std::string>(this->map_s));
 }
 
-
-
- std::map<std::string, std::string>  Parse_location::map_element(std::ifstream my_file, unsigned int nbr_loc)
-{   
-}
-
-
-Parse_server::~Parse_server()
+Parsing::~Parsing()
 {
-    
-}
-Parse_location::~Parse_location()
-{
-    
 }

@@ -31,37 +31,22 @@ public:
     void set_two(unsigned int loc);
 };
 
-class Parse_server
+class Parsing
 {
 protected:
-    int listen;
-    std::string host;
-    std::string server_name;
-    std::string clinet_max_bosy_size;
-    std::string *error_pages;
-    std::string root;
+    // int listen;
+    // std::string host;
+    // std::string server_name;
+    // std::string clinet_max_bosy_size;
+    // std::string *error_pages;
+    // std::string root;
+    std::map<std::string, std::string> map_s;
 
 public:
-    Parse_server();
-    ~Parse_server();
-    std::map<std::string, std::string> map_element(std::ifstream my_file, unsigned int nbr_serv);
-};
-
-class Parse_location
-{
-protected:
-    std::string root;
-    std::string autoindex;
-    std::string index;
-    std::string allow_methods;
-    std::string redirection; // return _code _url [like:return(300)]
-    std::string CGI;
-    std::string upload_store_directory;
-
-public:
-    Parse_location();
-    ~Parse_location();
-    std::map<std::string, std::string> map_element(std::ifstream my_file, unsigned int nbr_loc);
+    Parsing();
+    ~Parsing();
+    std::map<std::string, std::string> map_simpl(std::ifstream my_file);
+    std::map<std::string, std::string> get_map();
 };
 
 bool compare_end(std::string const &s1, std::string const &s2);
