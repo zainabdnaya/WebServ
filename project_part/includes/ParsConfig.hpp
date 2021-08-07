@@ -1,5 +1,6 @@
 #ifndef PARSCONFIG_HPP
 #define PARSCONFIG_HPP
+
 #include <fstream>
 #include <iostream>
 #include <cstring>

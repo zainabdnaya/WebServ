@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 13:16:26 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/07 17:12:51 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/07 17:27:56 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int main()
                 line[i++] = 0;
         }
         // std::cout << countLines(result) << std::endl;
-        std::cout << in_line(result,27) << std::endl;
+        // std::cout << in_line(result,27) << std::endl;
         // result = "abcdefakka";
         // std::cout << std::string(result,0,1);
         // int i = 0;
