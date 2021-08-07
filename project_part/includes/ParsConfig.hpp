@@ -1,6 +1,6 @@
-#ifndef INCLUDE_HPP
-#define INCLUDE_HPP
-
+#ifndef PARSCONFIG_HPP
+#define PARSCONFIG_HPP
+#include <fstream>
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -8,7 +8,15 @@
 #include <map>
 #include <utility>
 #include <iomanip>
-#include <fstream>
+#include <unistd.h>
+#include <fcntl.h>
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <sstream>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
 
 class ParsConfig
 {
