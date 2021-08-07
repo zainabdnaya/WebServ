@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 13:16:26 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/07 17:00:31 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/07 17:12:51 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,3 @@ int main()
         // }
     }
 }
-
-// std::string line = "    dkdkdlkdk";
-// if(line.find("}") != std::string::npos)
-//     std::cout << "true" << std::endl;
-// else
-//     std::cout << "false" << std::endl;
