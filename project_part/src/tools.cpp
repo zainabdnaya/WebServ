@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 17:24:36 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 01:12:22 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 17:30:44 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ int nbr_lines(std::string source)
         i++;
     }
     return (lines);
+}
+
+bool is_whitespace(const std::string &s)
+{
+    for (std::string::const_iterator it = s.begin(); it != s.end(); ++it)
+    {
+        if (!isspace(*it) || *it != '\n')
+        {
+            return false;
+        }
+    }
+    return true;
 }

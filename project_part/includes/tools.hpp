@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 23:51:29 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 00:23:34 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 17:27:23 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ bool compare_end(std::string const &s1, std::string const &s2);
 bool line_equal(std::string const &line, std::string const &str);
 int check_details(std::string line);
 int nbr_lines(std::string source);
+bool is_whitespace(const std::string &s);
 
 
 

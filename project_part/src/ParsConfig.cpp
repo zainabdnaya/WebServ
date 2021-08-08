@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 12:58:13 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 17:38:03 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ std::map<int, std::string> get_map(char *av)
     std::string file = av;
     char line[1024];
     int fd = open(file.c_str(), O_RDONLY);
+    if (fd < 0)
+        error_msg("Error file not found");
     while ((res = read(fd, line, 1024)) > 0)
     {
         if (std::strcmp(line, "\n") != 0)
@@ -80,20 +82,52 @@ std::map<int, std::string> get_map(char *av)
     return (map_s);
 }
 /**************************************************************************/
+
 /******************** Error *******************************************/
 
 void check_error(std::map<int, std::string> error_mp)
 {
-    std::map<int, std::string>::iterator it;
-
-    for (it = error_mp.begin(); it != error_mp.end(); ++it)
+    std::map<int, std::string>::iterator it = error_mp.begin();
+    std::map<int, std::string> res;
+    int i = 1;
+    while (it != error_mp.end())
     {
-        while (it->second == "\n")
-            error_mp.erase(it->first);
-        if (it->first == 1 && it->second != "server")
-            error_msg("Error : file should start eith server");
+        if (is_whitespace(it->second) == true)
+        {
+            while (is_whitespace(it->second) == true)
+            {
+                // std::cout << "Error: " << it->first << std::endl;
+                // error_mp.erase(it->first);
+                it++;
+            }
+        }
+        else
+        {
+            res[i]= error_mp[it->first];
+            i++;
+            it++;
+        }
     }
-    for (it = error_mp.begin(); it != error_mp.end(); ++it)
+    int k = 0;
+    for (it = res.begin(); it != res.end(); ++it)
+    {
+        if (it->first == 1 && res[it->first] != "server")
+            error_msg("Error : file should start with server");
+        if (res[it->first] == "server" && res[it->first + 1] != "{")
+            error_msg("Error : after server should be only  open bracket");
+        if (res[it->first].find("location ") != std::string::npos)
+        {
+            if (res[it->first].find("{") == std::string::npos && res[it->first + 1] != "{")
+                error_msg("Error : after location should be only  open bracket");
+        }
+        if (res[it->first].find("}") != std::string::npos)
+            k++;
+        else if (res[it->first].find("{") != std::string::npos)
+            k--;
+    }
+    if (k != 0)
+        error_msg("Error : check The number of brackets");
+    for (it = res.begin(); it != res.end(); ++it)
     {
         std::cout << "key is " << it->first;
         std::cout << "  the value: \t\t\t";
