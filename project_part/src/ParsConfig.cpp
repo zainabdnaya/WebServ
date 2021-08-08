@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 18:12:53 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 19:12:07 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ std::map<int, std::string> get_map(char *av)
     int i = 0;
     while (i < nbr_lines(result))
     {
-        map_s[i + 1] = Those_lines(result, i, nbr_lines(result));// no spaces befor or after 
+        map_s[i + 1] = Those_lines(result, i, nbr_lines(result)); // no spaces befor or after
         i++;
     }
     return (map_s);
@@ -106,6 +106,8 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
     int k = 0;
     for (it = res.begin(); it != res.end(); ++it)
     {
+        if (res[it->first].find("#") != std::string::npos)
+            error_msg("Error: no comment allowed");
         if (it->first == 1 && res[it->first] != "server")
             error_msg("Error : file should start with server");
         if (res[it->first] == "server" && res[it->first + 1] != "{")
@@ -117,14 +119,12 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         }
         if (res[it->first].find("}") != std::string::npos)
             k++;
-        else if (res[it->first].find("{") != std::string::npos)
+        if (res[it->first].find("{") != std::string::npos)
             k--;
     }
     if (k != 0)
         error_msg("Error : check The number of brackets");
-    std::map<int, std::string>::reverse_iterator rit =res.rbegin();
-    if(res[rit->first] != "}")
-        error_msg("Error : You should close the bracket of server");
+    std::map<int, std::string>::reverse_iterator rit = res.rbegin();
     // for (rit = res.rbegin(); rit != res.rend(); ++rit)
     // {
 
@@ -132,6 +132,36 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
     //     std::cout << "  the value: \t\t\t";
     //     std::cout << rit->second << std::endl;
     // }
+    for (it = res.begin(); it != res.end(); ++it)
+    {
+        if (it->second == "server")
+        {
+            std::map<int, std::string>::iterator it1 = it;
+            it1++; //
+            while (it1 != res.end())
+            {
+                if(it1->second == "server")
+                    error_msg("Error : you can't put server inside another server");
+                else
+                    it1++;
+            }
+        }
+        else if (res[it->first].find("location ") != std::string::npos)
+        {
+            std::map<int, std::string>::iterator it1 = it;
+            it1++; //
+            while (it1 != res.end())
+            {
+                if(it1->second == "server"  || it1->second == "server{" ||it1->second == "server {")
+                    error_msg("Error : you can't put server inside a location");
+                else
+                    it1++;
+            }
+            
+        }
+    }
+    if (res[rit->first] != "}")
+        error_msg("Error : You should close the bracket of server");
     return (res);
 }
 
