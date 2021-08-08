@@ -6,67 +6,11 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/07 17:05:00 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 01:18:01 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../includes/Webserv.hpp"
-
-int nbr_lines(std::string source)
-{
-    int i;
-    int lines;
-
-    i = 0;
-    lines = 1;
-    while (source[i])
-    {
-        if (source[i] == '\n')
-            lines++;
-        i++;
-    }
-    return (lines);
-}
-
-std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
-{
-    int i = 0;
-    int j = 0;
-    int w = 0;
-    if (nbr_line >= txt_lines)
-        return (std::string(NULL));
-    while (i < nbr_line)
-    {
-        if (txt[j] == '\n')
-            i++;
-        j++;
-    }
-    while (txt[j] != '\n' && std::isspace(txt[j])) // for the space befor  txt start from where the txt begins
-        j++;
-    w = 0;
-    while (txt[w + j] && txt[w + j] != '\n') // when the line ends until \n
-        ++w;
-    while (w > 0 && std::isspace(txt[w + j - 1])) // escape space after the txt o the line
-        --w;
-    return (std::string(txt, j, w));
-}
-
-bool compare_end(std::string const &s1, std::string const &s2)
-{
-    int i;
-    int j;
-
-    i = s1.size() - 1;
-    j = s2.size() - 1;
-    while (i >= 0 && j >= 0)
-    {
-        if (s1[i] != s2[j])
-            return false;
-        i--;
-        j--;
-    }
-    return true;
-}
+#include "../includes/Webserv.hpp"
 
 int main(int ac, char **av)
 {
@@ -77,35 +21,77 @@ int main(int ac, char **av)
     }
     if (compare_end(av[1], ".conf") == true)
     {
-        int res = 0;
-        std::string result;
-        std::string file = av[1];
-        char line[2024];
-        int fd = open(file.c_str(), O_RDONLY);
-        while ((res = read(fd, line, 1024)) > 0)
-        {
-            if (std::strcmp(line, "\n") != 0)
-                result = result + line;
-            int i = 0;
-            while (i < 1024)
-                line[i++] = 0;
-        }
-        std::map<int, std::string> tst;
-        int i = 0;
-        while (i < nbr_lines(result))
-        {
-            tst[i + 1] = Those_lines(result, i,nbr_lines(result));
-            i++;
-        }
-        std::map<int, std::string>::iterator it = tst.begin();
-        for (it = tst.begin(); it != tst.end(); ++it)
-        {
-            std::cout << "key is " << it->first;
-            std::cout << "  the value: \t\t\t";
-            std::cout << it->second << std::endl;
-        }
+        ParsConfig pconf(av[1]);
+
+        // std::map<int, std::string>::iterator it = tst.begin();
+        // for (it = tst.begin(); it != tst.end(); ++it)
+        // {
+        //     std::cout << "key is " << it->first;
+        //     std::cout << "  the value: \t\t\t";
+        //     std::cout << it->second << std::endl;
+        // }
     }
     else
         std::cerr << "wrong file \n";
     return (0);
 }
+
+/*----------------------------------------------------------------
+std::map<std::string, std::string> map_simpl(std::ifstream &my_file)
+{
+    std::map <std::string,std::string> map_s;
+    std::string key;
+    std::string str1;
+    std::string str;
+    while (my_file >> str)
+    {
+        while ((str == "{" || str == "server"))
+            my_file >> str;
+        if (str == "}" && my_file.eof())
+            my_file >> str;
+        else if (str == "}" && !my_file.eof())
+            break;
+        else if (str == "http_methods")
+        {
+            key = str;
+            my_file >> str;
+            str1 = "";
+            while (str == "GET" || str == "HEAD" || str == "POST" || str == "PUT" || str == "OPTIONS" || str == "DELETE")
+            {
+                str1 += str + " ";
+                my_file >> str;
+            }
+            map_s[key] = str1;
+            if (str == "error_page")
+            {
+                key = str;
+                my_file >> str;
+                str1 = str;
+                my_file >> str;
+                map_s[key] = str1 + " " + str;
+            }
+            else
+            {
+                key = str;
+                my_file >> str;
+                map_s[key] = str;
+            }
+        }
+        else if (str == "error_page")
+        {
+            key = str;
+            my_file >> str;
+            str1 = str;
+            my_file >> str;
+            map_s[key] = str1 + " " + str;
+        }
+        else
+        {
+            key = str;
+            my_file >> str;
+            map_s[key] = str;
+        }
+    }
+    return (map_s);
+}
+*/

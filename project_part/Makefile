@@ -8,6 +8,7 @@ OBJ_PATH= obj
 
 SRC_NAME= main.cpp\
 		  ParsConfig.cpp\
+		  tools.cpp\
 
 OBJ_NAME= $(SRC_NAME:.cpp=.o)
 

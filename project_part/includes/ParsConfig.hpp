@@ -1,6 +1,8 @@
 #ifndef PARSCONFIG_HPP
 #define PARSCONFIG_HPP
 
+#include "tools.hpp"
+
 #include <fstream>
 #include <iostream>
 #include <cstring>
@@ -11,8 +13,6 @@
 #include <iomanip>
 #include <unistd.h>
 #include <fcntl.h>
-#include <iostream>
-#include <cstdlib>
 #include <vector>
 #include <sstream>
 #include <sys/stat.h>
@@ -26,10 +26,11 @@ private:
     unsigned int nbr_location;
     unsigned int server;
     unsigned int location;
-    std::map<std::string, std::string> map_s;
+    std::map<int, std::string> map_s;
+    char *file;
 
 public:
-     ParsConfig();
+    ParsConfig(char *file);
     ~ParsConfig();
     unsigned int get_server();
     unsigned int get_location();
@@ -40,13 +41,11 @@ public:
     void set_one(unsigned int ser);
     void set_two(unsigned int loc);
     std::map<std::string, std::string> map_simpl(std::ifstream &my_file);
-    std::map<std::string, std::string> get_map();
 };
 
-bool compare_end(std::string const &s1, std::string const &s2);
-void check_error(char *file);
+std::map<int, std::string> get_map(char *av);
+void check_error(std::map<int, std::string> error_mp);
 void error_msg(std::string const msg);
-bool line_equal(std::string const &line, std::string const &str);
-int check_details(std::string line);
+std::string Those_lines(std::string txt, int nbr_line, int txt_lines);
 
 #endif

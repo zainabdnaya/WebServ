@@ -6,11 +6,17 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 17:24:36 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/07 17:00:35 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 01:12:22 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.hpp"
+#include "../includes/tools.hpp"
+
+void    error_msg(std::string const msg)
+{
+    std::cout << msg << std::endl;
+    exit(EXIT_FAILURE);    
+}
 
 bool	line_equal(std::string const &line, std::string const &str)
 {
@@ -41,9 +47,18 @@ bool compare_end(std::string const &s1, std::string const &s2)
     return true;
 }
 
-
-void    error_msg(std::string const msg)
+int nbr_lines(std::string source)
 {
-    std::cout << msg << std::endl;
-    exit(EXIT_FAILURE);    
+    int i;
+    int lines;
+
+    i = 0;
+    lines = 1;
+    while (source[i])
+    {
+        if (source[i] == '\n')
+            lines++;
+        i++;
+    }
+    return (lines);
 }
