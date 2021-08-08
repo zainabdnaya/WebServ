@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 17:38:03 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 18:12:53 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ ParsConfig::ParsConfig(char *file)
     this->server = 0;
     this->location = 0;
     this->file = file;
-    std::map<int, std::string> tst = get_map(file);
-    check_error(tst);
-    // std::map<int, std::string>::iterator it = tst.begin();
-    // for (it = tst.begin(); it != tst.end(); ++it)
-    // {
-    //     std::cout << "key is " << it->first;
-    //     std::cout << "  the value: \t\t\t";
-    //     std::cout << it->second << std::endl;
-    // }
+    std::map<int, std::string> tst = clean_map(get_map(file));
+    std::map<int, std::string>::iterator it = tst.begin();
+    for (it = tst.begin(); it != tst.end(); ++it)
+    {
+        std::cout << "key is " << it->first;
+        std::cout << "  the value: \t\t\t";
+        std::cout << it->second << std::endl;
+    }
 }
 /****************  Those lines **********************************************/
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
@@ -76,7 +75,7 @@ std::map<int, std::string> get_map(char *av)
     int i = 0;
     while (i < nbr_lines(result))
     {
-        map_s[i + 1] = Those_lines(result, i, nbr_lines(result));
+        map_s[i + 1] = Those_lines(result, i, nbr_lines(result));// no spaces befor or after 
         i++;
     }
     return (map_s);
@@ -85,7 +84,7 @@ std::map<int, std::string> get_map(char *av)
 
 /******************** Error *******************************************/
 
-void check_error(std::map<int, std::string> error_mp)
+std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
 {
     std::map<int, std::string>::iterator it = error_mp.begin();
     std::map<int, std::string> res;
@@ -95,15 +94,11 @@ void check_error(std::map<int, std::string> error_mp)
         if (is_whitespace(it->second) == true)
         {
             while (is_whitespace(it->second) == true)
-            {
-                // std::cout << "Error: " << it->first << std::endl;
-                // error_mp.erase(it->first);
                 it++;
-            }
         }
         else
         {
-            res[i]= error_mp[it->first];
+            res[i] = error_mp[it->first];
             i++;
             it++;
         }
@@ -127,12 +122,17 @@ void check_error(std::map<int, std::string> error_mp)
     }
     if (k != 0)
         error_msg("Error : check The number of brackets");
-    for (it = res.begin(); it != res.end(); ++it)
-    {
-        std::cout << "key is " << it->first;
-        std::cout << "  the value: \t\t\t";
-        std::cout << it->second << std::endl;
-    }
+    std::map<int, std::string>::reverse_iterator rit =res.rbegin();
+    if(res[rit->first] != "}")
+        error_msg("Error : You should close the bracket of server");
+    // for (rit = res.rbegin(); rit != res.rend(); ++rit)
+    // {
+
+    //     std::cout << "key is " << rit->first;
+    //     std::cout << "  the value: \t\t\t";
+    //     std::cout << rit->second << std::endl;
+    // }
+    return (res);
 }
 
 /******************************************************************************/

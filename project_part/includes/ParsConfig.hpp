@@ -44,7 +44,7 @@ public:
 };
 
 std::map<int, std::string> get_map(char *av);
-void check_error(std::map<int, std::string> error_mp);
+std::map<int, std::string> clean_map(std::map<int, std::string> error_mp);
 void error_msg(std::string const msg);
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines);
 
