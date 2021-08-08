@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 19:12:07 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/08 21:54:26 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
             error_msg("Error : file should start with server");
         if (res[it->first] == "server" && res[it->first + 1] != "{")
             error_msg("Error : after server should be only  open bracket");
-        if (res[it->first].find("location ") != std::string::npos)
+        if (res[it->first].find("location ") != std::string::npos && !res[it->first].find("{"))
         {
-            if (res[it->first].find("{") == std::string::npos && res[it->first + 1] != "{")
-                error_msg("Error : after location should be only  open bracket");
+            it++;
+            if ( res[it->first] != "{")
+                error_msg("Error : after location should be only open bracket");
         }
         if (res[it->first].find("}") != std::string::npos)
             k++;
@@ -140,7 +141,7 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
             it1++; //
             while (it1 != res.end())
             {
-                if(it1->second == "server")
+                if(it1->second == "server"  || it1->second == "server{" ||it1->second == "server {")
                     error_msg("Error : you can't put server inside another server");
                 else
                     it1++;
@@ -149,15 +150,15 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         else if (res[it->first].find("location ") != std::string::npos)
         {
             std::map<int, std::string>::iterator it1 = it;
-            it1++; //
+            it1++; 
+            
             while (it1 != res.end())
             {
-                if(it1->second == "server"  || it1->second == "server{" ||it1->second == "server {")
+                if(res[it->first].find("server") != std::string::npos)
                     error_msg("Error : you can't put server inside a location");
                 else
                     it1++;
-            }
-            
+            } 
         }
     }
     if (res[rit->first] != "}")
