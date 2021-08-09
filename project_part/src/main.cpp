@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 01:18:01 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/09 16:39:03 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,7 @@ int main(int ac, char **av)
     if (compare_end(av[1], ".conf") == true)
     {
         ParsConfig pconf(av[1]);
-
-        // std::map<int, std::string>::iterator it = tst.begin();
-        // for (it = tst.begin(); it != tst.end(); ++it)
-        // {
-        //     std::cout << "key is " << it->first;
-        //     std::cout << "  the value: \t\t\t";
-        //     std::cout << it->second << std::endl;
-        // }
+        pconf.get_cmap();
     }
     else
         std::cerr << "wrong file \n";

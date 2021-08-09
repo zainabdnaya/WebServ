@@ -32,15 +32,9 @@ private:
 public:
     ParsConfig(char *file);
     ~ParsConfig();
-    unsigned int get_server();
-    unsigned int get_location();
-    unsigned int get_one();
-    unsigned int get_two();
-    void set_server(unsigned int nbr_ser);
-    void set_location(unsigned int nbr_loc);
-    void set_one(unsigned int ser);
-    void set_two(unsigned int loc);
-    std::map<std::string, std::string> map_simpl(std::ifstream &my_file);
+
+    void set_map(std::map<int, std::string> map_s);
+    std::map<int, std::string> get_cmap(void);
 };
 
 std::map<int, std::string> get_map(char *av);

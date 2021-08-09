@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/09 12:32:50 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/09 16:37:31 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,31 @@ ParsConfig::ParsConfig(char *file)
     this->server = 0;
     this->location = 0;
     this->file = file;
-    std::map<int, std::string> tst = clean_map(get_map(file));
-    std::map<int, std::string>::iterator it = tst.begin();
-    for (it = tst.begin(); it != tst.end(); ++it)
-    {
-        std::cout << "key is " << it->first;
-        std::cout << "  the value: \t\t\t";
-        std::cout << it->second << std::endl;
-    }
+    // std::map<int, std::string> tst = clean_map(get_map(file));
+    // std::map<int, std::string>::iterator it = tst.begin();
+    set_map( clean_map(get_map(file)));
+    // for (it = tst.begin(); it != tst.end(); ++it)
+    // {
+    //     std::cout << "key is " << it->first;
+    //     std::cout << "  the value: \t\t\t";
+    //     std::cout << it->second << std::endl;
+    // }
+}
+void    ParsConfig::set_map(std::map<int, std::string> map)
+{
+    this->map_s = map;
+}
+
+std::map<int ,std::string>    ParsConfig::get_cmap(void)
+{
+        std::map<int, std::string>::iterator it = this->map_s.begin();
+        for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
+        {
+            std::cout << "key is " << it->first;
+            std::cout << "  the value: \t\t\t";
+            std::cout << it->second << std::endl;
+        }
+        return(this->map_s);
 }
 /****************  Those lines **********************************************/
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
@@ -115,7 +132,7 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         if (res[it->first].find("location ") != std::string::npos && !res[it->first].find("{"))
         {
             it++;
-            if ( res[it->first] != "{")
+            if (res[it->first] != "{")
                 error_msg("Error : after location should be only open bracket");
         }
         if (res[it->first].find("}") != std::string::npos)
@@ -138,10 +155,10 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         if (it->second == "server")
         {
             std::map<int, std::string>::iterator it1 = it;
-            it1++; 
+            it1++;
             while (it1 != res.end())
             {
-                if(it1->second == "server"  || it1->second == "server{" ||it1->second == "server {")
+                if (it1->second == "server" || it1->second == "server{" || it1->second == "server {")
                     error_msg("Error : you can't put server inside another server");
                 else
                     it1++;
@@ -150,15 +167,15 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         else if (res[it->first].find("location ") != std::string::npos)
         {
             std::map<int, std::string>::iterator it1 = it;
-            it1++; 
-            
+            it1++;
+
             while (it1 != res.end())
             {
-                if(res[it->first].find("server") != std::string::npos)
+                if (res[it->first].find("server") != std::string::npos)
                     error_msg("Error : you can't put server inside a location");
                 else
                     it1++;
-            } 
+            }
         }
     }
     if (res[rit->first] != "}")
