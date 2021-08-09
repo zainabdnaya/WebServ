@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/08 21:54:26 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/09 12:32:50 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         if (it->second == "server")
         {
             std::map<int, std::string>::iterator it1 = it;
-            it1++; //
+            it1++; 
             while (it1 != res.end())
             {
                 if(it1->second == "server"  || it1->second == "server{" ||it1->second == "server {")
