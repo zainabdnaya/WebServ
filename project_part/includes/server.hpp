@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:23:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/10 16:34:29 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/14 16:39:10 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ class Server
         int socket_fd;
         int new_socket;
         struct sockaddr_in add;
+        int sizeof_add;
     public:
         Server();
         ~Server();
         int creatSocket_fd(void);
         void set_strructAddr(struct sockaddr_in add);
-        
-}
+        int get_sizeofAdd(void);
+        void bind_socket(struct sockaddr_in add);
+        void listen_socket(int socket_fd);
+        void accept_socket(int socket_fd,struct sockaddr_in add);
+};
 
 #endif
