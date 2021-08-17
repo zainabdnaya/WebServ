@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/15 09:16:24 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/15 19:30:52 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int main(int ac, char **av)
     {
         ParsConfig pconf(av[1]);
         pconf.get_cmap();
-        Server server();
+        
+        
     }
     else
         std::cerr << "wrong file \n";

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:10 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/15 10:42:58 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/15 19:28:04 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 Server::Server()
 {
-    std::memset((char *)&this->add, 0, sizeof(this->add)); 
-        this->socket_fd = socket(AF_INET, SOCK_STREAM,0);
-    if(this->socket_fd < 0)
-        error_msg("Error: you can't create socket");
-    add.sin_port = htons(5003);
-    add.sin_family = AF_INET;
-    add.sin_addr.s_addr = htonl(INADDR_ANY);
-    if(bind(this->socket_fd, (struct sockaddr *)&add, sizeof_add) < 0)
-        error_msg("Error: you can't bind socket");
+//     std::memset((char *)&this->add, 0, sizeof(this->add)); 
+//         this->socket_fd = socket(AF_INET, SOCK_STREAM,0);
+//     if(this->socket_fd < 0)
+//         error_msg("Error: you can't create socket");
+//     add.sin_port = htons(5003);
+//     add.sin_family = AF_INET;
+//     add.sin_addr.s_addr = htonl(INADDR_ANY);
+//     if(bind(this->socket_fd, (struct sockaddr *)&add, sizeof_add) < 0)
+//         error_msg("Error: you can't bind socket");
     
-     if (listen(socket_fd, SOMAXCONN)< 0) // SOMAXCONN is the maximum number of pending connections that can be queued up before connections are refused.
-      {
-        std::cerr << "Listening failed" << std::endl;
-        exit(EXIT_FAILURE);
-      }
-       if ((new_socket = accept(socket_fd, (struct sockaddr *)&add, &sizeof(add)) < 0)
-    {
-          std::cerr << "acceptance failed" << std::endl;
-          exit(EXIT_FAILURE);
-    }
-    
+//      if (listen(socket_fd, SOMAXCONN)< 0) // SOMAXCONN is the maximum number of pending connections that can be queued up before connections are refused.
+//       {
+//         std::cerr << "Listening failed" << std::endl;
+//         exit(EXIT_FAILURE);
+//       }
+//        if ((new_socket = accept(socket_fd, (struct sockaddr *)&add, &sizeof(add)) < 0)
+//     {
+//           std::cerr << "acceptance failed" << std::endl;
+//           exit(EXIT_FAILURE);
+//     }
 }
 
 int Server::creatSocket_fd()

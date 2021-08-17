@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/ParsConfig.hpp"
+#include <string>
 
 ParsConfig::ParsConfig(char *file)
 {
@@ -19,16 +20,9 @@ ParsConfig::ParsConfig(char *file)
     this->server = 0;
     this->location = 0;
     this->file = file;
-    // std::map<int, std::string> tst = clean_map(get_map(file));
-    // std::map<int, std::string>::iterator it = tst.begin();
     set_map( clean_map(get_map(file)));
-    // for (it = tst.begin(); it != tst.end(); ++it)
-    // {
-    //     std::cout << "key is " << it->first;
-    //     std::cout << "  the value: \t\t\t";
-    //     std::cout << it->second << std::endl;
-    // }
 }
+
 void    ParsConfig::set_map(std::map<int, std::string> map)
 {
     this->map_s = map;
@@ -37,13 +31,57 @@ void    ParsConfig::set_map(std::map<int, std::string> map)
 std::map<int ,std::string>    ParsConfig::get_cmap(void)
 {
         std::map<int, std::string>::iterator it = this->map_s.begin();
+        // for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
+        // {
+        //     std::cout << "key is " << it->first;
+        //     std::cout << "  the value: \t\t\t";
+        //     std::cout << it->second << std::endl;
+        // }
+
+
         for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
+        {
+            if( it->second == std::string("server") || it->second == std::string("}") || it->second == std::string("{"))
+                it++;
+            else
+            {
+
+                char *str1 = (char *)it->second.c_str();
+                char **ptr = ft_charSplit(str1, (char *)" \t");
+                int i  = 1;
+                std::string str ;
+                std::string  key = ptr[0];
+
+                while(ptr[i])
+                {
+                    // std::cout << ptr[i] << std::endl;
+                    if ( i == 1)
+                    str = ptr[i];
+                    else
+                    {
+                    str = str + " " +  ptr[i];
+                    // std::cout << "sr ==> "<<  str  << std::endl;
+                    }
+                    i++;
+                }
+                std::cout << "key ==> " << key << " value ==> " << str << std::endl;
+                tst[key] = str;
+                i = 1;
+
+            }
+        }
+        std::map<std::string, std::string>::iterator it_s = this->tst.begin() ; 
+        for (it_s = this->tst.begin(); it_s != this->tst.end(); ++it_s)
         {
             std::cout << "key is " << it->first;
             std::cout << "  the value: \t\t\t";
-            std::cout << it->second << std::endl;
+            std::cout << it->second.c_str() << std::endl;
         }
+
+
         return(this->map_s);
+    
+
 }
 /****************  Those lines **********************************************/
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)

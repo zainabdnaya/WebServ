@@ -28,7 +28,7 @@ private:
     unsigned int location;
     std::map<int, std::string> map_s;
     char *file;
-
+std::map<std::string, std::string> tst;
 public:
     ParsConfig(char *file);
     ~ParsConfig();
