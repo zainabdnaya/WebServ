@@ -18,6 +18,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <iterator>
 
 class ParsConfig
 {
@@ -28,13 +29,15 @@ private:
     unsigned int location;
     std::map<int, std::string> map_s;
     char *file;
-std::map<std::string, std::string> tst;
+    std::multimap<std::string, std::string> tst;
 public:
     ParsConfig(char *file);
     ~ParsConfig();
 
     void set_map(std::map<int, std::string> map_s);
     std::map<int, std::string> get_cmap(void);
+    std::multimap<std::string, std::string>  get_mp();
+    void set_mmap(std::multimap<std::string, std::string> tst);
 };
 
 std::map<int, std::string> get_map(char *av);

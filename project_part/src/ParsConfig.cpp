@@ -37,13 +37,23 @@ std::map<int ,std::string>    ParsConfig::get_cmap(void)
         //     std::cout << "  the value: \t\t\t";
         //     std::cout << it->second << std::endl;
         // }
+        return(this->map_s);
+}
+
+void ParsConfig::set_mmap(std::multimap<std::string, std::string>  tst)
+{
+      std::map<int, std::string>::iterator it = this->map_s.begin();
+        // for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
+        // {
+        //     std::cout << "key is " << it->first;
+        //     std::cout << "  the value: \t\t\t";
+        //     std::cout << it->second << std::endl;
+        // }
 
 
         for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
         {
-            if( it->second == std::string("server") || it->second == std::string("}") || it->second == std::string("{"))
-                it++;
-            else
+            if( it->second != std::string("server") && it->second != std::string("}") && it->second != std::string("{"))
             {
 
                 char *str1 = (char *)it->second.c_str();
@@ -64,24 +74,26 @@ std::map<int ,std::string>    ParsConfig::get_cmap(void)
                     }
                     i++;
                 }
-                std::cout << "key ==> " << key << " value ==> " << str << std::endl;
-                tst[key] = str;
+                tst.insert(std::pair<std::string,std::string> (key, str));
+                // std::cout << "key ==> " << key << " value ==> " << str << std::endl;
                 i = 1;
 
             }
         }
-        std::map<std::string, std::string>::iterator it_s = this->tst.begin() ; 
-        for (it_s = this->tst.begin(); it_s != this->tst.end(); ++it_s)
+        std::multimap<std::string, std::string>::iterator it_s; 
+        for (it_s = tst.begin(); it_s != tst.end(); ++it_s)
         {
-            std::cout << "key is " << it->first;
-            std::cout << "  the value: \t\t\t";
-            std::cout << it->second.c_str() << std::endl;
+            std::cout << "key is [ " << it_s->first;
+            std::cout << " ]  it's value: \t\t\t [ ";
+            std::cout << it_s->second <<  " ]"<< std::endl;
         }
 
+}
 
-        return(this->map_s);
-    
-
+std::multimap<std::string, std::string> ParsConfig::get_mp()
+{
+    set_mmap(this->tst);
+    return(this->tst);
 }
 /****************  Those lines **********************************************/
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
