@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 16:39:32 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/17 10:41:00 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/18 14:17:46 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ int main(int ac, char **av)
     if (compare_end(av[1], ".conf") == true)
     {
         ParsConfig pconf(av[1]);
-        pconf.get_cmap();
-        pconf.get_mp();
-        
+        pconf.get_cmap();        
     }
     else
         std::cerr << "wrong file \n";

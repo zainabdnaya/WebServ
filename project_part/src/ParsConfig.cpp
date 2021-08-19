@@ -28,34 +28,13 @@ void    ParsConfig::set_map(std::map<int, std::string> map)
     this->map_s = map;
 }
 
-std::map<int ,std::string>    ParsConfig::get_cmap(void)
+std::unordered_multimap<std::string ,std::string>ParsConfig::get_cmap(void)
 {
         std::map<int, std::string>::iterator it = this->map_s.begin();
-        // for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
-        // {
-        //     std::cout << "key is " << it->first;
-        //     std::cout << "  the value: \t\t\t";
-        //     std::cout << it->second << std::endl;
-        // }
-        return(this->map_s);
-}
-
-void ParsConfig::set_mmap(std::multimap<std::string, std::string>  tst)
-{
-      std::map<int, std::string>::iterator it = this->map_s.begin();
-        // for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
-        // {
-        //     std::cout << "key is " << it->first;
-        //     std::cout << "  the value: \t\t\t";
-        //     std::cout << it->second << std::endl;
-        // }
-
-
         for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
         {
             if( it->second != std::string("server") && it->second != std::string("}") && it->second != std::string("{"))
             {
-
                 char *str1 = (char *)it->second.c_str();
                 char **ptr = ft_charSplit(str1, (char *)" \t");
                 int i  = 1;
@@ -74,26 +53,20 @@ void ParsConfig::set_mmap(std::multimap<std::string, std::string>  tst)
                     }
                     i++;
                 }
-                tst.insert(std::pair<std::string,std::string> (key, str));
-                // std::cout << "key ==> " << key << " value ==> " << str << std::endl;
+                this->tst.insert(std::pair<std::string,std::string> (key, str));
+                std::cout << "key ==> " << key << " value ==> " << str << std::endl;
                 i = 1;
 
             }
         }
-        std::multimap<std::string, std::string>::iterator it_s; 
-        for (it_s = tst.begin(); it_s != tst.end(); ++it_s)
-        {
-            std::cout << "key is [ " << it_s->first;
-            std::cout << " ]  it's value: \t\t\t [ ";
-            std::cout << it_s->second <<  " ]"<< std::endl;
-        }
-
-}
-
-std::multimap<std::string, std::string> ParsConfig::get_mp()
-{
-    set_mmap(this->tst);
-    return(this->tst);
+                std::unordered_multimap<std::string, std::string>::iterator it_s; 
+        // for (it_s = this->tst.begin(); it_s != this->tst.end(); ++it_s)
+        // {
+        //     std::cout << "[ " << it_s->first;
+        //     std::cout << " ] \t\t\t ==> [ ";
+        //     std::cout << it_s->second <<  " ]"<< std::endl;
+        // }
+        return(this->tst);
 }
 /****************  Those lines **********************************************/
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
@@ -206,13 +179,13 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
         {
             std::map<int, std::string>::iterator it1 = it;
             it1++;
-            while (it1 != res.end())
-            {
-                if (it1->second == "server" || it1->second == "server{" || it1->second == "server {")
-                    error_msg("Error : you can't put server inside another server");
-                else
-                    it1++;
-            }
+            // while (it1 != res.end())
+            // {
+            //     if (it1->second == "server" || it1->second == "server{" || it1->second == "server {")
+            //         error_msg("Error : you can't put server inside another server");
+            //     else
+            //         it1++;
+            // }
         }
         else if (res[it->first].find("location ") != std::string::npos)
         {
@@ -228,8 +201,6 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
             }
         }
     }
-    if (res[rit->first] != "}")
-        error_msg("Error : You should close the bracket of server");
     return (res);
 }
 
