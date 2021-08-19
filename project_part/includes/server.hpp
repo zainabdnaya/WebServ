@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:23:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/18 13:43:09 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/19 10:25:51 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 #include <fcntl.h>
 #include <sstream>
 #include "ParsConfig.hpp"
-class Server 
+
+class Server  : public ParsConfig
 {
     private:
         int socket_fd;
