@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:23:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/19 10:25:51 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/19 10:50:32 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 #include <sstream>
 #include "ParsConfig.hpp"
 
-class Server  : public ParsConfig
+class Server
 {
     private:
         int socket_fd;
         int new_socket;
         struct sockaddr_in add;
         int sizeof_add;
+        std::unordered_multimap<std::string, std::string> serv_map;
     public:
-        Server();
+        Server(std::unordered_multimap<std::string, std::string>);
         ~Server();
         int creatSocket_fd(void);
         void set_strructAddr(struct sockaddr_in add);

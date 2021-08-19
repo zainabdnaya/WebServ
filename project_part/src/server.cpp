@@ -6,15 +6,15 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:27:10 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/15 19:28:04 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/19 10:51:28 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/server.hpp"
 
-Server::Server()
+Server::Server(std::unordered_multimap<std::string, std::string> mp)
 {
-//     std::memset((char *)&this->add, 0, sizeof(this->add)); 
+    std::memset((char *)&this->add, 0, sizeof(this->add)); 
 //         this->socket_fd = socket(AF_INET, SOCK_STREAM,0);
 //     if(this->socket_fd < 0)
 //         error_msg("Error: you can't create socket");
