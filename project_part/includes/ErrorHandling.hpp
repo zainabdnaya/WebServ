@@ -1,5 +1,5 @@
-#ifndef PARSCONFIG_HPP
-#define PARSCONFIG_HPP
+#ifndef ERRORHANDLING_HPP
+#define ERRORHANDLING_HPP
 
 #include "tools.hpp"
 
@@ -20,22 +20,26 @@
 #include <sys/types.h>
 #include <iterator>
 #include <unordered_map>
+#include <ctype.h>
 
 
-class ParsConfig
+
+class ErrorHandling
 {
 private:
     unsigned int nbr_server;
     unsigned int nbr_location;
     unsigned int server;
     unsigned int location;
+    
     std::map<int , std::string> map_s;
     char *file;
     std::unordered_multimap<std::string, std::string> tst;
 public:
-    ParsConfig(char *file);
-    ~ParsConfig();
+     ErrorHandling(char *file);
+    ~ErrorHandling();
     void set_map(std::map<int, std::string> map_s);
+    std::map<int , std::string> get_map_s();
     std::unordered_multimap<std::string, std::string> get_cmap(void);
 };
 

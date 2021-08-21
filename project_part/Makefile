@@ -7,7 +7,7 @@ HDR_PATH= ./includes
 OBJ_PATH= obj
 
 SRC_NAME= main.cpp\
-		  ParsConfig.cpp\
+		  ErrorHandling.cpp\
 		  tools.cpp\
 		  server.cpp\
 

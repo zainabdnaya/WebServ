@@ -1,19 +1,18 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ParsConfig.cpp                                     :+:      :+:    :+:   */
+/*   ErrorHandling.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/06 21:33:38 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/09 16:37:31 by zainabdnaya      ###   ########.fr       */
+/*   Created: 2021/08/21 16:02:50 by zainabdnaya       #+#    #+#             */
+/*   Updated: 2021/08/21 16:20:51 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ParsConfig.hpp"
-#include <string>
+#include "../includes/ErrorHandling.hpp"
 
-ParsConfig::ParsConfig(char *file)
+ErrorHandling::ErrorHandling(char *file)
 {
     this->nbr_server = 0;
     this->nbr_location = 0;
@@ -23,17 +22,31 @@ ParsConfig::ParsConfig(char *file)
     set_map( clean_map(get_map(file)));
 }
 
-void    ParsConfig::set_map(std::map<int, std::string> map)
+void    ErrorHandling::set_map(std::map<int, std::string> map)
 {
     this->map_s = map;
 }
 
-std::unordered_multimap<std::string ,std::string>ParsConfig::get_cmap(void)
+std::map<int , std::string> ErrorHandling::get_map_s()
+{
+    std::map<int, std::string>::iterator it = this->map_s.begin();
+    for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
+        {
+            std::cout << "[ " << it->first;
+            std::cout << " ] \t\t\t ==> [ ";
+            std::cout << it->second <<  " ]"<< std::endl;
+        }
+    return(this->map_s);
+}
+
+std::unordered_multimap<std::string ,std::string>ErrorHandling::get_cmap(void)
 {
         std::map<int, std::string>::iterator it = this->map_s.begin();
+        // std::vector<std::string> vc;
+
         for (it = this->map_s.begin(); it != this->map_s.end(); ++it)
         {
-            if( it->second != std::string("server") && it->second != std::string("}") && it->second != std::string("{"))
+            // if( it->second != std::string("server") && it->second != std::string("}") && it->second != std::string("{"))
             {
                 char *str1 = (char *)it->second.c_str();
                 char **ptr = ft_charSplit(str1, (char *)" \t");
@@ -54,12 +67,17 @@ std::unordered_multimap<std::string ,std::string>ParsConfig::get_cmap(void)
                     i++;
                 }
                 this->tst.insert(std::pair<std::string,std::string> (key, str));
-                std::cout << "key ==> " << key << " value ==> " << str << std::endl;
+                // std::cout << "key ==> " << key << " value ==> " << str << std::endl;
                 i = 1;
 
             }
         }
-                std::unordered_multimap<std::string, std::string>::iterator it_s; 
+               
+         std::unordered_multimap<std::string, std::string>::iterator it_s; 
+
+
+
+
         // for (it_s = this->tst.begin(); it_s != this->tst.end(); ++it_s)
         // {
         //     std::cout << "[ " << it_s->first;
@@ -69,6 +87,18 @@ std::unordered_multimap<std::string ,std::string>ParsConfig::get_cmap(void)
         return(this->tst);
 }
 /****************  Those lines **********************************************/
+
+int check_end_of_string(std::string str, int i,int j)
+{
+    while(i < j)
+    {
+        if(str[i] == '\0')
+            return(0);
+        i++;
+    }
+    return (1);
+}
+
 std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
 {
     int i = 0;
@@ -78,17 +108,22 @@ std::string Those_lines(std::string txt, int nbr_line, int txt_lines)
         return (std::string(NULL));
     while (i < nbr_line)
     {
-        if (txt[j] == '\n')
+        if (txt[j++] == '\n')
             i++;
-        j++;
     }
     while (txt[j] != '\n' && std::isspace(txt[j])) // for the space befor  txt start from where the txt begins
         j++;
     w = 0;
-    while (txt[w + j] && txt[w + j] != '\n') // when the line ends until \n
-        ++w;
+    while ( txt[j + w] && txt[w + j] != '\n' && std::isprint(txt[j+w]) ) // when the line ends until \n
+        {
+            w++;
+        // std::cout << std::string(txt, j, w) << std::endl;
+        }
+    // printf(" for line %d : j == %d || w == %d\n",i,j,w);
     while (w > 0 && std::isspace(txt[w + j - 1])) // escape space after the txt o the line
-        --w;
+        {
+            w--;
+        }
     return (std::string(txt, j, w));
 }
 /****************************************************************************/
@@ -112,11 +147,13 @@ std::map<int, std::string> get_map(char *av)
         while (i < 1024)
             line[i++] = 0;
     }
-    int i = 0;
-    while (i < nbr_lines(result))
+    int i  = 0;
+    int len = nbr_lines(result);
+    while (i < len)
     {
-        map_s[i + 1] = Those_lines(result, i, nbr_lines(result)); // no spaces befor or after
-        i++;
+        map_s[i] = Those_lines(result, i , (len)); // no spaces befor or after
+        // printf("[%s]\n",Those_lines(result, i, nbr_lines(result)).c_str()); /// string ----> char *
+        i++;   
     }
     return (map_s);
 }
@@ -152,7 +189,7 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
             error_msg("Error : file should start with server");
         if (res[it->first] == "server" && res[it->first + 1] != "{")
             error_msg("Error : after server should be only  open bracket");
-        if (res[it->first].find("location ") != std::string::npos && !res[it->first].find("{"))
+        if (res[it->first].find("location") != std::string::npos && !res[it->first].find("{"))
         {
             it++;
             if (res[it->first] != "{")
@@ -165,37 +202,24 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
     }
     if (k != 0)
         error_msg("Error : check The number of brackets");
-    std::map<int, std::string>::reverse_iterator rit = res.rbegin();
-    // for (rit = res.rbegin(); rit != res.rend(); ++rit)
+    // for (it = res.begin(); it != res.end(); ++it)
     // {
 
-    //     std::cout << "key is " << rit->first;
+    //     std::cout << "key is " << it->first;
     //     std::cout << "  the value: \t\t\t";
-    //     std::cout << rit->second << std::endl;
+    //     std::cout << it->second << std::endl;
     // }
     for (it = res.begin(); it != res.end(); ++it)
     {
-        if (it->second == "server")
-        {
-            std::map<int, std::string>::iterator it1 = it;
-            it1++;
-            // while (it1 != res.end())
-            // {
-            //     if (it1->second == "server" || it1->second == "server{" || it1->second == "server {")
-            //         error_msg("Error : you can't put server inside another server");
-            //     else
-            //         it1++;
-            // }
-        }
-        else if (res[it->first].find("location ") != std::string::npos)
+        if (res[it->first].find("location") != std::string::npos)
         {
             std::map<int, std::string>::iterator it1 = it;
             it1++;
 
             while (it1 != res.end())
             {
-                if (res[it->first].find("server") != std::string::npos)
-                    error_msg("Error : you can't put server inside a location");
+                if ( k != 0 && (res[it->first].find("server") != std::string::npos || res[it->first].find("location") != std::string::npos) )
+                    error_msg("Error!!");
                 else
                     it1++;
             }
@@ -205,7 +229,7 @@ std::map<int, std::string> clean_map(std::map<int, std::string> error_mp)
 }
 
 /******************************************************************************/
-ParsConfig::~ParsConfig()
+ErrorHandling::~ErrorHandling()
 {
 }
 // void check_error(char *file)

@@ -1,7 +1,7 @@
 #ifndef WEBSERV_HPP
 #define WEBSERV_HPP
 
-#include "ParsConfig.hpp"
+#include "ErrorHandling.hpp"
 #include "tools.hpp"
 #include "server.hpp"
 

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:23:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/08/19 10:50:32 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/08/21 16:04:03 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <cstring>
 #include <fcntl.h>
 #include <sstream>
-#include "ParsConfig.hpp"
+#include "ErrorHandling.hpp"
 
 class Server
 {
