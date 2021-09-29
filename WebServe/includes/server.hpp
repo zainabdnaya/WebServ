@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:23:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/09/23 10:48:33 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/09/27 16:16:29 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ private:
     int csock;
     int lenght;
     int selected;
+    int chunked;
     char *request;
     Socket *sock;
     fd_set readfds;
@@ -80,13 +81,15 @@ private:
     std::vector<int> MasterSockets;
     std::vector<std::string> Content;
     std::map<int, std::string> _clients;
-         std::map<std::string, std::string> stor;
+    std::map<std::string, std::string> stor;
     std::multimap<int, std::multimap<std::string, std::string> > loc;
-
+    std::map<std::string, std::string> errors;
 public:
     Server(Parsing *pars, char *envp[]);
+    void unchunkRequest(std::string &req,Response *res);
     int _Accept_client(int sock);
     int _Get_request(int csock);
+    int check_header(std::string header);
     int check_index(std::string str);
     int check_dir(std::string dir, std::string str);
     bool checkRequest(std::string &req);
@@ -116,7 +119,7 @@ public:
     int check_if_file_or_dir(std::string path);
     std::string CreateAutoIndexHtmlFile(std::string path, std::string locatioName);
     std::string getBodyFromFile(std::string path);
-void execute_cgi(Response *response, int TargetServer, int TargetLocation, std::string root, Parsing *parsing, cgi *c, Request *request);
+int execute_cgi(Response *response, int TargetServer, int TargetLocation, std::string root, Parsing *parsing, cgi *c, Request *request);
 void SaveAsFile(std::string path, std::string body, int b);
 std::map<std::string, std::string> pars_request();
     ~Server();

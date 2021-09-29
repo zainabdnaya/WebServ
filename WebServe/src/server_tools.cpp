@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_tools.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 21:46:25 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/09/16 12:16:50 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/09/28 16:29:01 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int Server::_Accept_client(int sock)
         std::cout << csock << "\t  =  New connection" << std::endl;
     }
     else
-      throw(AcceptFailed());
+        throw(AcceptFailed());
     _clients.insert(std::pair<int, std::string>(csock, ""));
     return (csock);
 }
@@ -51,41 +51,83 @@ int Server::_Get_request(int sock)
     }
     return (n);
 }
+
+int Server::check_header(std::string header)
+{
+    int i = 0;
+    //check if header is valid
+    if ((header.find("HTTP/1.1") == std::string::npos))
+        return (0);
+    else if ((header.find("GET") == std::string::npos) && (header.find("POST") == std::string::npos) && (header.find("DELETE") == std::string::npos))
+        return (0);
+    std::string line;
+    std::stringstream ss(header);
+    while (std::getline(ss, line))
+    {
+        if (line.find("Host:") != std::string::npos)
+            i++;
+    }
+    if (i == 0)
+        return (0);
+    return (1);
+}
+
 bool Server::checkRequest(std::string &req)
 {
-	if (!(req.find("\r\n\r\n") == std::string::npos))
-	{
-		std::string headers = req.substr(0, req.find("\r\n\r\n") + 4);
-		if (headers.find("Content-Length") != std::string::npos)
-		{
-			size_t length = std::atoi(headers.substr(headers.find("Content-Length: ")).c_str() + 16);
-			std::string body = req.substr(req.find("\r\n\r\n") + 4);
-			if (body.length() < length)
-				return false;
-		}
-		return true;
-	}
-	return false;
+    if ((req.find("\r\n\r\n") != std::string::npos))
+    {
+        std::string headers = req.substr(0, req.find("\r\n\r\n") + 4);
+        if (headers.find("Transfer-Encoding: chunked") != std::string::npos)
+        {
+            chunked = true;
+            if (req.find("\r\n\r\n") == std::string::npos)
+                return false;
+        }
+        else if (headers.find("Content-Length") != std::string::npos)
+        {
+            size_t length = std::atoi(headers.substr(headers.find("Content-Length: ")).c_str() + 16);
+            std::string body = req.substr(req.find("\r\n\r\n") + 4);
+            if (body.length() < length)
+                return false;
+        }
+        return true;
+    }
+    return false;
 }
 
-void    Server::witch_server(std::map<int,std::string> str ,Parsing *pars)
+int get_size_of_chunked(std::string str)
 {
-    std::multimap <int, std::multimap<std::string, std::string> > _loc_map;
-    // _loc_map = p->Getloc_map();
-    
+    int i = 0;
+    std::stringstream sstream(str);
+    sstream >> std::hex >> i;
+    return (i);
 }
 
-// char * removeHTTPHeader(char *buffer, int &bodySize)
-//  {
-//     char *t = strstr(buffer, "\r\n\r\n");
-//     t = t + 4;
-
-//     for (char* it = buffer; it != t; ++it) 
-//         ++bodySize;
-
-//     return t;
-// }
-
+void Server::unchunkRequest(std::string &req, Response *res)
+{
+    int new_size = 0;
+    int i = 0;
+    std::cout << its->second << std::endl;
+    std::string output = req.substr(0, req.find("\r\n\r\n") + 4);
+    req = req.substr(req.find("\r\n\r\n") + 4);
+    std::string line;
+    int size = 0;
+    std::stringstream bodyStream(req);
+    while (line != "\r\n")
+    {
+        i = 0;
+        std::getline(bodyStream, line);
+        new_size = get_size_of_chunked(line);
+        std::getline(bodyStream, line);
+        if(i == 0)
+        output+= line;
+        if (new_size == 0)
+            break;
+        size += new_size;
+    }
+    res->setContentLength(std::to_string(size));
+    its->second = output;
+}
 
 int Server::check_index(std::string str)
 {
@@ -173,5 +215,3 @@ int Server::check_dir(std::string dir, std::string str)
 //         file.close();
 //     }
 // }
-
-
